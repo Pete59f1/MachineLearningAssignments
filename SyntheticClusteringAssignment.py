@@ -1,6 +1,5 @@
-from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 
 # Looking at the current dataset
+data = pd.read_csv("s1-cb.txt", header=None)
+print(data.head())
