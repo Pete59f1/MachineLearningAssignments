@@ -39,7 +39,7 @@ X = np.array([[x[0], y[0]], [x[1], y[1]], [x[2], y[2]], [x[3], y[3]], [x[4], y[4
               [x[14], y[14]]])
 
 # Creating our model and tells it to cluster in two groups and then we train it
-kmeans = KMeans(n_clusters=2)
+kmeans = KMeans(n_clusters=4)
 kmeans.fit(X)
 
 # Getting the centroids and labels. Gonna use these to illustrate
@@ -47,7 +47,7 @@ centroids = kmeans.cluster_centers_
 labels = kmeans.labels_
 
 # The colors we are gonna give our clusters
-clusterColor = ['r.', 'g.']
+clusterColor = ['r.', 'g.', 'b.', 'c.']
 
 # Using pyplot to illustrate how kmeans have clustered our data
 # Also printing the coordinates and which cluster they belong to
