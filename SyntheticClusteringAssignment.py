@@ -31,12 +31,27 @@ for i in dataArray:
 plt.scatter(x, y)
 plt.show()
 
-# To begin with we want only two clusters: Flat clustering?
 # We need to put our x and y arrays back into one so we can train our model with it
 # There must be a better way to do this -_-
 X = np.array([[x[0], y[0]], [x[1], y[1]], [x[2], y[2]], [x[3], y[3]], [x[4], y[4]], [x[5], y[5]], [x[6], y[6]],
               [x[7], y[7]], [x[8], y[8]], [x[9], y[9]], [x[10], y[10]], [x[11], y[11]], [x[12], y[12]], [x[13], y[13]],
               [x[14], y[14]]])
+
+
+# Using this code to figure out what the optimal number of clusters is
+# Looking at the graph this piece of code gives us
+# It would seem that the most optimal number would be 3 or 4
+wcss = []
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters=i)
+    kmeans.fit(X)
+    wcss.append(kmeans.inertia_)
+
+plt.plot(range(1, 11), wcss)
+plt.title("Elbow method")
+plt.xlabel("Number of clusters")
+plt.ylabel("WCSS")
+plt.show()
 
 # Creating our model and tells it to cluster in two groups and then we train it
 kmeans = KMeans(n_clusters=4)
