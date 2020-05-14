@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
+from scipy.spatial.distance import cdist
 
 # Looking at the current dataset
 # Looking at the data like this doesn't give us much info
@@ -41,16 +42,16 @@ X = np.array([[x[0], y[0]], [x[1], y[1]], [x[2], y[2]], [x[3], y[3]], [x[4], y[4
 # Using this code to figure out what the optimal number of clusters is
 # Looking at the graph this piece of code gives us
 # It would seem that the most optimal number would be 3 or 4
-wcss = []
+distortions = []
 for i in range(1, 11):
     kmeans = KMeans(n_clusters=i)
     kmeans.fit(X)
-    wcss.append(kmeans.inertia_)
+    distortions.append(sum(np.min(cdist(X, kmeans.cluster_centers_, 'euclidean'), axis=1)) / X.shape[0])
 
-plt.plot(range(1, 11), wcss)
+plt.plot(range(1, 11), distortions, 'bx-')
 plt.title("Elbow method")
-plt.xlabel("Number of clusters")
-plt.ylabel("WCSS")
+plt.xlabel("K")
+plt.ylabel("Distortions")
 plt.show()
 
 # Creating our model and tells it to cluster in two groups and then we train it
